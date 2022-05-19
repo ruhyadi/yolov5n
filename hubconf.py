@@ -69,9 +69,11 @@ def custom(path='path/to/model.pt', autoshape=True, verbose=True, device=None):
     # YOLOv5 custom or local model
     return _create(path, autoshape=autoshape, verbose=verbose, device=device)
 
+
 def yolov5_nodeflux(pretrained=True, channels=3, classes=5, autoshape=True, verbose=True, device=None):
-    # YOLOv5 custom or local model
+    # YOLOv5-Nodeflux
     return _create('yolov5_nodeflux', pretrained, channels, classes, autoshape, verbose, device)
+
 
 def yolov5n(pretrained=True, channels=3, classes=80, autoshape=True, verbose=True, device=None):
     # YOLOv5-nano model https://github.com/ultralytics/yolov5
