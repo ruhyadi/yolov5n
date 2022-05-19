@@ -1,0 +1,47 @@
+metadata:
+  name: yolov5
+  namespace: cvat
+  annotations:
+    name: YOLOv5 - Didi
+    type: detector
+    framework: pytorch
+    spec: |
+      [
+        { "id": 0, "name": "car" },
+        { "id": 1, "name": "bus" },
+        { "id": 2, "name": "truck" },
+        { "id": 3, "name": "motorcycle" },
+        { "id": 4, "name": "pedestrian" },
+      ]
+spec:
+  description: YOLO v5 via pytorch hub
+  runtime: 'python:3.6'
+  handler: main:handler
+  eventTimeout: 30s
+  build:
+    image: cvat/yolov5
+    baseImage: ultralytics/yolov5:latest-cpu
+
+    directives:
+      preCopy:
+        - kind: USER
+          value: root
+        - kind: RUN
+          value: apt update && apt install --no-install-recommends -y libglib2.0-0
+        - kind: WORKDIR
+          value: /opt/nuclio
+
+  triggers:
+    myHttpTrigger:
+      maxWorkers: 2
+      kind: 'http'
+      workerAvailabilityTimeoutMilliseconds: 10000
+      attributes:
+        maxRequestBodySize: 33554432 # 32MB
+
+  platform:
+    attributes:
+      restartPolicy:
+        name: always
+        maximumRetryCount: 3
+      mountMode: volume
