@@ -129,7 +129,7 @@ if __name__ == '__main__':
     # model = _create(name='yolov5s', pretrained=True, channels=3, classes=80, autoshape=True, verbose=True)  # pretrained
     # model = custom(path='path/to/model.pt')  # custom
 
-    model = torch.hub.load('ruhyadi/yolov5n:cvat', 'yolov5_nodeflux')
+    model = torch.hub.load('ruhyadi/yolov5n:cvat-v1.0', 'yolov5_nodeflux')
 
     imgs = ['data/images/bus.jpg']
 
