@@ -126,25 +126,13 @@ def yolov5x6(pretrained=True, channels=3, classes=80, autoshape=True, verbose=Tr
 
 
 if __name__ == '__main__':
-    model = _create(name='yolov5s', pretrained=True, channels=3, classes=80, autoshape=True, verbose=True)  # pretrained
+    # model = _create(name='yolov5s', pretrained=True, channels=3, classes=80, autoshape=True, verbose=True)  # pretrained
     # model = custom(path='path/to/model.pt')  # custom
 
-    # Verify inference
-    from pathlib import Path
+    model = torch.hub.load('ruhyadi/yolov5n:cvat', 'yolov5_nodeflux')
 
-    import numpy as np
-    from PIL import Image
+    imgs = ['data/images/bus.jpg']
 
-    from utils.general import cv2
-
-    imgs = [
-        'data/images/zidane.jpg',  # filename
-        Path('data/images/zidane.jpg'),  # Path
-        'https://ultralytics.com/images/zidane.jpg',  # URI
-        cv2.imread('data/images/bus.jpg')[:, :, ::-1],  # OpenCV
-        Image.open('data/images/bus.jpg'),  # PIL
-        np.zeros((320, 640, 3))]  # numpy
-
-    results = model(imgs, size=320)  # batched inference
-    results.print()
-    results.save()
+    results = model(imgs, size=640)
+    json = results.pandas().xyxy[0].to_dict('records')
+    print(json)

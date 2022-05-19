@@ -2,7 +2,7 @@ metadata:
   name: yolov5
   namespace: cvat
   annotations:
-    name: YOLOv5 - Didi
+    name: YOLOv5-Didi
     type: detector
     framework: pytorch
     spec: |
