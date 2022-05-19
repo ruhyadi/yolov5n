@@ -8,7 +8,8 @@ def init_context(context):
     context.logger.info("Init context...  0%")
 
     # Read the DL model
-    model = torch.hub.load('ruhyadi/yolov5n:cvat-v1.0', 'yolov5_nodeflux')  # or yolov5m, yolov5l, yolov5x, custom
+    torch.hub._validate_not_a_forked_repo=lambda a,b,c: True
+    model = torch.hub.load('ruhyadi/yolov5n:cvat-v1.1', 'yolov5_nodeflux')  # or yolov5m, yolov5l, yolov5x, custom
     # model = torch.hub.load('ultralytics/yolov5:master', 'custom', 'path/to/yolov5s.onnx')
     context.user_data.model = model
 
