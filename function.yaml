@@ -1,5 +1,5 @@
 metadata:
-  name: yolov5
+  name: yolov5-didi
   namespace: cvat
   annotations:
     name: YOLOv5-Didi
@@ -11,7 +11,7 @@ metadata:
         { "id": 1, "name": "bus" },
         { "id": 2, "name": "truck" },
         { "id": 3, "name": "motorcycle" },
-        { "id": 4, "name": "pedestrian" },
+        { "id": 4, "name": "pedestrian" }
       ]
 spec:
   description: YOLO v5 via pytorch hub

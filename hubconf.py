@@ -128,8 +128,7 @@ def yolov5x6(pretrained=True, channels=3, classes=80, autoshape=True, verbose=Tr
 if __name__ == '__main__':
     # model = _create(name='yolov5s', pretrained=True, channels=3, classes=80, autoshape=True, verbose=True)  # pretrained
     # model = custom(path='path/to/model.pt')  # custom
-    torch.hub._validate_not_a_forked_repo=lambda a,b,c: True
-    model = torch.hub.load('ruhyadi/yolov5n:cvat-v1.1', 'yolov5_nodeflux')
+    model = torch.hub.load('ruhyadi/yolov5n:cvat-v1.2', 'yolov5_nodeflux')
 
     imgs = ['data/images/bus.jpg']
 
