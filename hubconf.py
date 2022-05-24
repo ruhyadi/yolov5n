@@ -19,7 +19,7 @@ def _create(name: str = None, tag: str = None, classes: int = None, device: str 
     repo_tag = tag
     if tag is None:
         repo_tag = repo.tags[-1] # last tag
-    weights_url = repo_url / "releases/download" / str(repo_tag) / str(weights_list[idx])
+    weights_url = str(repo_url / "releases/download" / str(repo_tag) / str(weights_list[idx]))
     # https:/github.com/username/repo/releases/download/tags/model.pt
 
     # TODO: load your own model configuration
