@@ -15,12 +15,13 @@ def _create(name: str = None, tag: str = None, classes: int = None, device: str 
         f'[INFO] not found, try: {weights_list}'
 
     repo = git.Repo(os.getcwd())
-    repo_url = Path(repo.remotes.origin.url)
-    repo_tag = tag
+    username = (repo.remotes.origin.url).split('/')[-2]
+    reponame = (repo.remotes.origin.url).split('/')[-1]
+    repotag = tag
     if tag is None:
-        repo_tag = repo.tags[-1] # last tag
-    weights_url = str(repo_url / "releases/download" / str(repo_tag) / str(weights_list[idx]))
-    # https:/github.com/username/repo/releases/download/tags/model.pt
+        repotag = repo.tags[-1] # last tag
+    weights_url = f'https://github.com/{username}/{reponame}/releases/download/{repotag}/{weights_list[idx]}'    # https:/github.com/username/repo/releases/download/tags/model.pt
+    # https:/github.com/ruhyadi/yolov5n/releases/download/v2.2/yolov5_nodeflux.pt
 
     # TODO: load your own model configuration
     cfg = list((Path(__file__).parent / 'models').rglob(f'{name}.yaml'))[0]  # model.yaml path
