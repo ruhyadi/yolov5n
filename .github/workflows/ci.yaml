@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       # TODO: change image container
-      image: ruhyadi/yolov5n:cvat-v1.3
+      image: ultralytics/yolov5:latest-cpu
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3

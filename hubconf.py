@@ -68,7 +68,6 @@ def yolov5_nodeflux(pretrained=True, channels=3, classes=5, autoshape=True, verb
     # YOLOv5-Nodeflux
     return _create('yolov5_nodeflux', pretrained, channels, classes, autoshape, verbose, device)
 
-
 if __name__ == '__main__':
 
     import argparse
