@@ -3,6 +3,8 @@
 # Start FROM Ubuntu image https://hub.docker.com/_/ubuntu
 FROM ultralytics/yolov5:latest-cpu
 
+RUN pip3 install git
+
 ENTRYPOINT [ "bash" ]
 # Usage Examples -------------------------------------------------------------------------------------------------------
 
