@@ -21,3 +21,18 @@ jobs:
       - name: Load Model with Python
         run: |
           python3 hubconf.py --repository ${{ github.repository }} --tag ${{ github.ref_name }}
+
+  delete-release:
+    needs: [torchhub]
+    name: Delete Release
+    runs-on: ubuntu-latest
+    if: always() && (needs.torchhub.result == 'failure')
+    steps:
+      - name: Delete Tag and Release 
+        uses: dev-drprasad/delete-tag-and-release@v0.2.0
+        with:
+          delete_release: true
+          tag_name: ${{ github.ref_name }}
+          repo: ${{ github.repository }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
