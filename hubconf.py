@@ -43,7 +43,7 @@ def _create(name: str = None, tag: str = None, classes: int = None, device: str 
 # TODO: define your model name
 def yolov5_nodeflux(imgsize=640, classes=5, device='cpu'):
     # load custom model
-    return _create('yolov5_nodeflux', tag='cvat-v1.3', device=device)
+    return _create('yolov5_nodeflux', tag='v3.0', device=device)
     
 if __name__ == '__main__':
 
@@ -51,7 +51,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description="Torch Hub Testing")
     parser.add_argument('--repository', type=str, default='ruhyadi/yolov5n', help='Repository, username/reponame')
-    parser.add_argument('--tag', type=str, default='cvat-v1.3', help='Release tag')
+    parser.add_argument('--tag', type=str, default='v3.0', help='Release tag')
     args = parser.parse_args()
 
     weights = torch.hub.list(f'{args.repository}:{args.tag}', force_reload=True)
