@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       # TODO: change image container
-      image: username/reponame:tag
+      image: ruhyadi/yolov5n:cvat-v1.3
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
