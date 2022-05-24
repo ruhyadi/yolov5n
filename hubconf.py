@@ -38,7 +38,6 @@ def yolov5_nodeflux(imgsize=640, classes=5, device='cpu'):
     return _create('yolov5_nodeflux', tag='v2.0', device=device)
     
 if __name__ == '__main__':
-<<<<<<< HEAD
 
     import argparse
 
@@ -46,11 +45,6 @@ if __name__ == '__main__':
     parser.add_argument('--repository', type=str, required=True, help='Repository, username/reponame')
     parser.add_argument('--tag', type=str, required=True, help='Release tag')
     args = parser.parse_args()
-=======
-    # model = _create(name='yolov5s', pretrained=True, channels=3, classes=80, autoshape=True, verbose=True)  # pretrained
-    # model = custom(path='path/to/model.pt')  # custom
-    model = torch.hub.load('ruhyadi/yolov5n:cvat-v1.2', 'yolov5_nodeflux')
->>>>>>> 58a2b822ba6bb0ea6f381a55886fbc743a24389d
 
     weights = torch.hub.list(f'{args.repository}:{args.tag}', force_reload=True)
 
