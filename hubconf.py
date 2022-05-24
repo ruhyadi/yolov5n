@@ -1,12 +1,12 @@
 import os
 import torch
 import git
-from pathlib import Path
-from models.common import AutoShape
-
-from models.yolo import Model
 
 def _create(name: str = None, tag: str = None, classes: int = None, device: str = 'cpu'):
+
+    from pathlib import Path
+    from models.common import AutoShape
+    from models.yolo import Model
 
     # TODO: add your own weights list with extension
     weights_list = ['yolov5_nodeflux.pt']
@@ -47,7 +47,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     weights = torch.hub.list(f'{args.repository}:{args.tag}', force_reload=True)
-
+    print(weights)
     for weight in weights:
-        model = torch.hub.load(f'{args.repository}:{args.tag}', weight, tag={args.tag})
+        model = torch.hub.load(f'{args.repository}:{args.tag}', weight)
         print(f'[INFO] Success load {weight.upper()}')
