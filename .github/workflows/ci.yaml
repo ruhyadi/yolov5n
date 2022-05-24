@@ -46,7 +46,7 @@ jobs:
     needs: [ deploy-model ]
     name: Delete Release
     runs-on: ubuntu-latest
-    if: always() && (needs.nuclio-container.result == 'failure')
+    if: always() && (needs.nuclio-container.result == 'failure' || needs.deploy-model.result == 'failure')
     steps:
       - name: Delete Tag and Release 
         uses: dev-drprasad/delete-tag-and-release@v0.2.0
