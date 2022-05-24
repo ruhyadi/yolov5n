@@ -2,11 +2,14 @@ import os
 import torch
 import git
 
+
+
 def _create(name: str = None, tag: str = None, classes: int = None, device: str = 'cpu'):
 
     from pathlib import Path
     from models.common import AutoShape
     from models.yolo import Model
+    from utils.general import intersect_dicts
 
     # TODO: add your own weights list with extension
     weights_list = ['yolov5_nodeflux.pt']
@@ -26,9 +29,15 @@ def _create(name: str = None, tag: str = None, classes: int = None, device: str 
     # TODO: load your own model configuration
     cfg = list((Path(__file__).parent / 'models').rglob(f'{name}.yaml'))[0]  # model.yaml path
     model = Model(cfg, nc=classes)
-    model.load_state_dict(
-        torch.hub.load_state_dict_from_url(weights_url, map_location=device)['model']
-        )
+    
+    ckpt = torch.hub.load_state_dict_from_url(weights_url, map_location=device)
+    csd = ckpt['model'].float().state_dict()
+    csd = intersect_dicts(csd, model.state_dict(), exclude=['anchors'])
+    model.load_state_dict(csd, strict=False)
+
+    if len(ckpt['model'].names) == classes:
+        model.names = ckpt['model'].names  # set class names attribute
+    
     model = AutoShape(model)
 
     return model.to(device)
