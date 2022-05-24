@@ -1,15 +1,21 @@
-# YOLOv5 🚀 by Ultralytics, GPL-3.0 license
+# syntax=docker/dockerfile:1
 
-# Start FROM Ubuntu image https://hub.docker.com/_/ubuntu
-FROM ultralytics/yolov5:latest-cpu
+FROM nvidia/cuda:10.2-base
+FROM python:3.8.12-buster
 
-RUN pip3 install GitPython
+RUN apt-get update && apt-get install -y --no-install-recommends \
+     libglib2.0-0 libsm6 libxrender1 libxext6 libgl1 && \
+     rm -rf /var/lib/apt/lists/*
+
+WORKDIR /home
+
+COPY requirements.txt requirements.txt
+
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+# Minimize image size 
+RUN (apt-get autoremove -y; \
+     apt-get autoclean -y) 
 
 ENTRYPOINT [ "bash" ]
-# Usage Examples -------------------------------------------------------------------------------------------------------
-
-# Build and Push
-# t=ultralytics/yolov5:latest-cpu && sudo docker build -f utils/docker/Dockerfile-cpu -t $t . && sudo docker push $t
-
-# Pull and Run
-# t=ultralytics/yolov5:latest-cpu && sudo docker pull $t && sudo docker run -it --ipc=host -v "$(pwd)"/datasets:/usr/src/datasets $t
