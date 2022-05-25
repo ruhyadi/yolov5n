@@ -256,3 +256,5 @@ fabric.properties
 
 hubconf copy.py
 test_.py
+
+nuclio-debugger/
